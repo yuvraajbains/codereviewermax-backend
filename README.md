@@ -1,30 +1,32 @@
-# 🧠 CodeReviewerMax Backend
+# 🧪 CodeReviewerMax Backend (Optional Flask Server)
 
-This is the **Flask-powered backend** for [CodeReviewerMax](https://github.com/YOUR_USERNAME/codereviewermax), a local AI-powered code review extension for VS Code.
+This is an **optional Flask backend** originally created to support [CodeReviewerMax](https://github.com/yuvraajbains/codereviewermax), a VS Code extension for local AI-powered code review.
 
-It loads a local language model (like [CodeT5+](https://huggingface.co/Salesforce/codet5p-770m), [StarCoderBase](https://huggingface.co/bigcode/starcoderbase), or others) and serves a simple API endpoint to generate reviews for selected code.
+It allows you to run Hugging Face transformer models (e.g., CodeT5+, StarCoder) locally using Python + Flask — but has been replaced in the main setup by the faster and more flexible [GPT4All](https://gpt4all.io) local server.
+
+---
+
+## ⚠️ Note
+
+> ✅ This backend is **not required** if you're using the GPT4All app with CodeReviewerMax (the recommended approach).  
+> 🧪 Use this only if you want to host your own model with Hugging Face and Python.
 
 ---
 
 ## 🚀 How It Works
 
-- Runs a local LLM model using Hugging Face Transformers
-- Accepts POST requests at `/review` with selected code
-- Returns a short review string formatted by the model
-- Meant to be connected to the CodeReviewerMax extension
+- Loads a Hugging Face-supported model (e.g. `codet5p-770m`)
+- Starts a Flask server at `http://localhost:5000/review`
+- Accepts `POST` requests with code and returns generated feedback
 
 ---
 
 ## 🧰 Requirements
 
-- Python 3.8+
-- HuggingFace Transformers
+- Python 3.9+
 - Flask
+- Hugging Face Transformers
 - PyTorch (CPU or GPU)
-- One of:
-  - `Salesforce/codet5p-770m`
-  - `bigcode/starcoderbase`
-  - Any lightweight model with text-to-text capability
 
 ---
 
@@ -35,8 +37,9 @@ git clone https://github.com/YOUR_USERNAME/codereviewer-backend.git
 cd codereviewer-backend
 
 python -m venv venv
-venv\Scripts\activate          # or source venv/bin/activate on Mac/Linux
+venv\Scripts\activate         # On Windows
+# or: source venv/bin/activate (Mac/Linux)
 
 pip install -r requirements.txt
-
 python server.py
+
